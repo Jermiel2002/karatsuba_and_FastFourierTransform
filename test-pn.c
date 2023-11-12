@@ -6,7 +6,7 @@
 #include "polynomes.h"
 
 #define TEST_EVAL 1
-#define TEST_PROD 0
+#define TEST_PROD 1
 #define TEST_KARA 0
 #define TEST_KARA_VS_NAIF 0
 #define TEST_FFT 1

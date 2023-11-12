@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*
+   Dans le langage C, le type de données "double complex" est utilisé pour représenter des nombres complexes, c'est-à-dire des nombres ayant une partie réelle et une partie imaginaire. 
+   En définissant un alias "complexe" pour "double complex," on peux utiliser "complexe" comme un raccourci pour déclarer des variables de type "double complex." 
+*/
 typedef double complex complexe;
 
 struct polynome {

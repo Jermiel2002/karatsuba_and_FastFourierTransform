@@ -95,12 +95,41 @@ void pn_afficher(const struct polynome *p)
 complexe pn_eval(const struct polynome *p, complexe z)
 {
 	complexe res = 0;
+	/*le but c'est de remplacer les X par z; pour cela, on va parcourir le tableau de coefficient du polynôme P.
+		--> Pour chaque coefficient, on multiplie sa valeur par le complexe z qui est élevé à la puissance de la position*/
+	for (int i = 0; i < p->taille; i++)
+		res += p->coeffs[i] * cpow(z,i); 
 	return res;
 }
 
 struct polynome *pn_produit(const struct polynome *p, const struct polynome *q)
 {
-	struct polynome *r = NULL;
+	//vérification des polynomes non nuls
+	if (p == NULL || q == NULL || p->coeffs == NULL || q->coeffs == NULL || p->taille <= 0 || q->taille <= 0)
+		return NULL;
+	
+	//on alloue de la mémoire pour le polynome résultat
+	struct polynome *r = malloc(sizeof(struct polynome));
+	if(r == NULL)
+		return NULL;
+
+	r->taille = p->taille + q->taille - 1;
+	//on alloue de la memoire pour notre tableau de coefficients complexes
+	r->coeffs = (complexe*) malloc(r->taille * sizeof(complex));
+	if(r->coeffs == NULL)
+	{
+		free(r);
+		return NULL;
+	}
+
+	for(int i = 0; i < p->taille; i++)
+	{
+		for (int j = 0; j < q->taille ; j++)
+		{
+			r->coeffs[i+j] += p->coeffs[i] * q->coeffs[j];
+		}
+	}
+	
 	return r;
 }
 
